@@ -176,3 +176,9 @@
     }
   }
 }
+
+/* Oculta o badge da Lovable no preview/publicado */
+#lovable-badge {
+  display: none !important;
+}
+
