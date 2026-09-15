@@ -1,5 +1,5 @@
 // ============================================================
-// DADOS DA CLÍNICA — altere aqui para personalizar todo o site
+// DADOS DA CLÍNICA
 // ============================================================
 
 import hero from "@/assets/hero.jpg";
@@ -9,9 +9,15 @@ import espera from "@/assets/espera.jpg";
 import fachada from "@/assets/fachada.jpg";
 import equipamentos from "@/assets/equipamentos.jpg";
 import atendimento from "@/assets/atendimento.jpg";
-import prof1 from "@/assets/prof-1.jpg";
-import prof2 from "@/assets/prof-2.jpg";
-import prof3 from "@/assets/prof-3.jpg";
+
+export interface PilarEquipe {
+  id: string;
+  titulo: string;
+  especialidade: string;
+  crm: string;
+  descricao: string;
+  destaques: string[];
+}
 
 export const clinica = {
   nome: "Consultórios Médicos",
@@ -62,27 +68,31 @@ export const especialidades = [
   { nome: "Odontologia", icone: "Smile", descricao: "Saúde bucal com atendimento cuidadoso e preventivo." },
 ];
 
-export const profissionais = [
+// Pilares Institucionais do Corpo Clínico (sem imagens nem dados genéricos de médicos fictícios)
+export const equipePilares: PilarEquipe[] = [
   {
-    nome: "Dra. Ana Carolina",
-    especialidade: "Dermatologista",
-    registro: "CRM [NÚMERO]",
-    bio: "Profissional dedicada ao atendimento individualizado e à promoção da saúde.",
-    foto: prof1,
+    id: "corpo-clinico",
+    titulo: "Corpo Clínico Multidisciplinar",
+    especialidade: "Atendimento Integrado",
+    crm: "Corpo Médico Registrado no CRM-AM",
+    descricao: "Médicos especialistas dedicados a diagnósticos precisos e acompanhamento contínuo, cobrindo diversas áreas da saúde com responsabilidade e ética.",
+    destaques: ["Atendimento Humanizado", "Prontuário Integrado", "Consultas Agendadas"],
   },
   {
-    nome: "Dr. Rafael Mendes",
-    especialidade: "Cardiologista",
-    registro: "CRM [NÚMERO]",
-    bio: "Atendimento voltado à prevenção e ao acompanhamento contínuo do paciente.",
-    foto: prof2,
+    id: "diagnostico",
+    titulo: "Diagnóstico e Prevenção",
+    especialidade: "Medicina Preventiva",
+    crm: "Laudos Especializados",
+    descricao: "Estrutura focada em exames de rotina, rastreamento preventivo e checagem detalhada para garantir decisões terapêuticas ágeis e assertivas.",
+    destaques: ["Check-up Completo", "Exames de Rotina", "Agilidade em Laudos"],
   },
   {
-    nome: "Dra. Juliana Prado",
-    especialidade: "Clínica Geral",
-    registro: "CRM [NÚMERO]",
-    bio: "Escuta atenta e cuidado integral em cada etapa do tratamento.",
-    foto: prof3,
+    id: "cuidado-continuo",
+    titulo: "Acompanhamento Individual",
+    especialidade: "Saúde Familiar e Bem-Estar",
+    crm: "Atendimento Personalizado",
+    descricao: "Planos de acompanhamento individualizados para assegurar tratamentos contínuos, eficazes e adaptados à realidade de cada paciente.",
+    destaques: ["Suporte ao Paciente", "Retorno Programado", "Ambiente Acolhedor"],
   },
 ];
 
