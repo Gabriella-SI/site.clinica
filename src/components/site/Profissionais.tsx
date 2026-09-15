@@ -1,57 +1,86 @@
-import { MessageCircle } from "lucide-react";
-import { profissionais, whatsappLink } from "@/data/clinica";
-import { Reveal } from "./Reveal";
+import React from "react";
+import { clinica, equipePilares, whatsappLink } from "@/data/clinica";
+import { Stethoscope, Activity, HeartPulse, CheckCircle2 } from "lucide-react";
 
-export function Profissionais() {
+export const Profissionais = () => {
+  const icones = [Stethoscope, Activity, HeartPulse];
+
   return (
-    <section id="profissionais" className="bg-secondary/60 py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-foreground">
-            Profissionais
-          </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
-            Conheça nossa equipe
+    <section id="profissionais" className="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
+        
+        {/* Cabeçalho da Seção */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-emerald-400 font-semibold text-sm uppercase tracking-wider">
+            Excelência & Cuidado
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-white">
+            Nossa Estrutura Médica
           </h2>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Perfis demonstrativos — substitua por nomes, registros e fotos reais da equipe.
+          <p className="text-slate-400">
+            Contamos com um corpo clínico qualificado e focado em oferecer atendimento humanizado e diagnósticos precisos em Manaus.
           </p>
-        </Reveal>
+        </div>
 
-        <ul className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-          {profissionais.map((p, i) => (
-            <Reveal as="li" key={p.nome} delay={i * 90}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card">
-                <div className="aspect-4/5 overflow-hidden bg-muted">
-                  <img
-                    src={p.foto}
-                    alt={`Retrato de ${p.nome}, ${p.especialidade}`}
-                    width={640}
-                    height={768}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+        {/* Cards Institucionais da Equipe */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {equipePilares.map((pilar, index) => {
+            const Icone = icones[index % icones.length];
+            return (
+              <div
+                key={pilar.id}
+                className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-8 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-14 h-14 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-400 mb-6">
+                    <Icone className="w-7 h-7" />
+                  </div>
+
+                  <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-1">
+                    {pilar.especialidade}
+                  </span>
+                  
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {pilar.titulo}
+                  </h3>
+                  
+                  <p className="text-xs text-slate-400 mb-4 font-mono">
+                    {pilar.crm}
+                  </p>
+
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                    {pilar.descricao}
+                  </p>
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-bold text-primary">{p.nome}</h3>
-                  <p className="mt-1 text-sm font-semibold text-accent-foreground">{p.especialidade}</p>
-                  <p className="mt-0.5 text-xs uppercase tracking-wide text-muted-foreground">{p.registro}</p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">“{p.bio}”</p>
-                  <a
-                    href={whatsappLink(`Olá! Gostaria de agendar um atendimento com ${p.nome} (${p.especialidade}).`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-secondary px-5 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    Agendar atendimento
-                  </a>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </ul>
+
+                <ul className="space-y-2 border-t border-slate-700/50 pt-6">
+                  {pilar.destaques.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-slate-300">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Botão de Chamada para Ação */}
+        <div className="mt-16 text-center">
+          <a
+            href={whatsappLink(`Olá! Gostaria de consultar a disponibilidade do corpo clínico na ${clinica.nome}.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+          >
+            Consultar Especialidades e Agendar
+          </a>
+        </div>
+
       </div>
     </section>
   );
-}
+};
+
+export default Profissionais;
